@@ -1,9 +1,12 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_firebase_app/ReuseableWidgets/default_widgets.dart';
 import 'package:my_firebase_app/Screens/home_screen.dart';
 import 'package:my_firebase_app/Screens/signup_screen.dart';
+
+import '../ReuseableWidgets/login_functionality.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -50,12 +53,14 @@ class LoginScreen extends StatelessWidget {
                     text: "Login",
                     context: context,
                     ontap: () {
+                      LoginFunctionality().clearLoginData();
+                      LoginFunctionality().saveLoginData(
+                          username: _username.text, password: _password.text);
                       FirebaseAuth.instance
                           .signInWithEmailAndPassword(
                               email: _username.text, password: _password.text)
                           .then((value) {
                         print("Login successfully");
-                        
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

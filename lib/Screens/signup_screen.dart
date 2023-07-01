@@ -1,16 +1,18 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_firebase_app/ReuseableWidgets/default_widgets.dart';
 import 'package:my_firebase_app/Screens/home_screen.dart';
 import 'package:my_firebase_app/Screens/login_screen.dart';
+import 'package:my_firebase_app/ReuseableWidgets/login_functionality.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
 
-  TextEditingController _username = TextEditingController();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,10 @@ class SignupScreen extends StatelessWidget {
                             email: _email.text, password: _password.text)
                         .then(
                           (value) => {
+                            LoginFunctionality().clearLoginData(),
+                            LoginFunctionality().saveLoginData(
+                                username: _email.text,
+                                password: _password.text),
                             print("sign up successful"),
                             Navigator.push(
                               context,

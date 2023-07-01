@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_firebase_app/Screens/login_screen.dart';
-
-import '../Screens/signup_screen.dart';
 
 Widget loginSignupButton({
   required Widget ontap,

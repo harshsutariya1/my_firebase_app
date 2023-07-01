@@ -1,9 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_firebase_app/ReuseableWidgets/default_widgets.dart';
 import 'package:my_firebase_app/Screens/login_screen.dart';
 import 'package:my_firebase_app/Screens/signup_screen.dart';
-// import 'package:my_firebase_app/Screens/Home_Screen.dart';
+import 'ReuseableWidgets/login_functionality.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,8 +27,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    LoginFunctionality().checkLoginStatus(ctx: context);
+    print("login status checked");
+  }
 
   @override
   Widget build(BuildContext context) {
